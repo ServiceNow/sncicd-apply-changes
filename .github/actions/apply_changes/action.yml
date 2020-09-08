@@ -1,0 +1,6 @@
+name: 'Apply changes'
+description: 'Starts applying changes from a remote source control to a specified local application.'
+
+runs:
+  using: 'node12'
+  main: 'index.js'

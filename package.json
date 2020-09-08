@@ -1,0 +1,43 @@
+{
+  "name": "cicd",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc --noEmit && jest",
+    "lint": "eslint . --ext .ts",
+    "prettify": "prettier --config prettier.json --write ./**/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vvoloshchuk/snow-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vvoloshchuk/snow-test/issues"
+  },
+  "homepage": "https://github.com/vvoloshchuk/snow-test#readme",
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/jest": "^26.0.12",
+    "@types/nock": "^11.1.0",
+    "@types/node": "^14.6.2",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
+    "eslint": "^7.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.4.2",
+    "nock": "^13.0.4",
+    "prettier": "^2.1.1",
+    "ts-jest": "^26.3.0",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.5",
+    "@actions/github": "^4.0.0",
+    "axios": "^0.20.0"
+  }
+}
