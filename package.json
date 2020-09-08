@@ -1,5 +1,5 @@
 {
-  "name": "cicd",
+  "name": "cicd_apply_changes",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vvoloshchuk/snow-test.git"
+    "url": "git+https://github.com/vvoloshchuk/apply_changes.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vvoloshchuk/snow-test/issues"
+    "url": "https://github.com/vvoloshchuk/apply_changes/issues"
   },
-  "homepage": "https://github.com/vvoloshchuk/snow-test#readme",
+  "homepage": "https://github.com/vvoloshchuk/apply_changes#readme",
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/jest": "^26.0.12",
