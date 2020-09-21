@@ -41,9 +41,16 @@ export default class App {
         }
     }
 
-    buildRequestUrl(instance: string, appSysId: string): string {
-        if (!instance || !appSysId) throw new Error(this.messages.incorrectConfig)
-        return `https://${instance}.service-now.com/api/sn_cicd/sc/apply_changes?app_sys_id=${appSysId}`
+    buildRequestUrl(instance: string, appSysId: string, scope: string): string {
+        if (!instance || (!appSysId && !scope)) throw new Error(this.messages.incorrectConfig)
+        let param = ''
+        if (appSysId && !scope) {
+            param = `app_sys_id=${appSysId}`
+        }
+        if (scope && !appSysId) {
+            param = `app_scope=${scope}`
+        }
+        return `https://${instance}.service-now.com/api/sn_cicd/sc/apply_changes?${param}`
     }
 
     /**
@@ -53,11 +60,12 @@ export default class App {
      *                  on the SNow side
      * @param appSysId  sys_id of the servicenow app
      *
+     * @param scope
      * @returns         Promise void
      */
-    async applyChanges(branch: branch_name, appSysId: string): Promise<void> {
+    async applyChanges(branch: branch_name, appSysId: string, scope: string): Promise<void> {
         // build the request api url
-        const url: string = this.buildRequestUrl(this.snowSourceInstance, appSysId)
+        const url: string = this.buildRequestUrl(this.snowSourceInstance, appSysId, scope)
         // set the branch to update on SNow side
         const body: RequestBody = {
             branch_name: branch,

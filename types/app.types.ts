@@ -17,8 +17,7 @@ export enum Errors {
     USERNAME = 'Username is not set',
     PASSWORD = 'Password is not set',
     INSTANCE = 'Instance is not set',
-    APPSYSID = 'AppSysID is not set',
-    GITHUB_TOKEN = 'GITHUB_TOKEN is missing',
+    SYSID_OR_SCOPE = 'Please specify scope or sys_id',
 }
 
 export interface ApplyResponse {
