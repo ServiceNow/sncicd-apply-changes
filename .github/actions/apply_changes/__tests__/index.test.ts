@@ -20,7 +20,7 @@ describe('Apply chnages', () => {
     it('fails without creds', () => {
         // simulate the secrets are not set
         process.env = {}
-        const errors = [Errors.USERNAME, Errors.PASSWORD, Errors.INSTANCE, Errors.APPSYSID].join('. ')
+        const errors = [Errors.USERNAME, Errors.PASSWORD, Errors.INSTANCE, Errors.SYSID_OR_SCOPE].join('. ')
 
         run()
 
