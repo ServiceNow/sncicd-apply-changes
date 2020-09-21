@@ -7,7 +7,7 @@
     "build": "tsc",
     "test": "tsc --noEmit && jest",
     "lint": "eslint . --ext .ts",
-    "prettify": "prettier --config prettier.json --write ./**/*.ts"
+    "format": "prettier --config prettier.json --write ./**/*.ts"
   },
   "repository": {
     "type": "git",

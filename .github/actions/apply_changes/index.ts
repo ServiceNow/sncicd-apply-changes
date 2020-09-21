@@ -8,7 +8,13 @@ export const configMsg = '. Configure Github secrets please'
 export const run = (): void => {
     try {
         const errors: string[] = []
-        const { snowUsername = '', snowPassword = '', snowSourceInstance = '', appSysID = '' } = process.env
+        const {
+            snowUsername = '',
+            snowPassword = '',
+            snowSourceInstance = '',
+            appSysID = '',
+            appScope = '',
+        } = process.env
 
         if (!snowUsername) {
             errors.push(Errors.USERNAME)
@@ -19,8 +25,8 @@ export const run = (): void => {
         if (!snowSourceInstance) {
             errors.push(Errors.INSTANCE)
         }
-        if (!appSysID) {
-            errors.push(Errors.APPSYSID)
+        if (!appSysID && !appScope) {
+            errors.push(Errors.SYSID_OR_SCOPE)
         }
 
         if (errors.length) {
@@ -38,7 +44,7 @@ export const run = (): void => {
             }
             const app = new App(props)
 
-            app.applyChanges(branch, appSysID).catch(error => {
+            app.applyChanges(branch, appSysID, appScope).catch(error => {
                 core.setFailed(error.message)
             })
         }
