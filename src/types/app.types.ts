@@ -5,19 +5,27 @@ export interface User {
 
 export interface AppProps extends User {
     snowSourceInstance: string;
+    appSysID?: string;
+    scope?: string;
 }
 
 export interface RequestBody {
     branch_name: branch_name;
 }
 
+export interface Params {
+    app_scope?: string;
+    app_sys_id?: string;
+}
+
 export type branch_name = string | undefined
 
 export enum Errors {
-    USERNAME = 'Username is not set',
-    PASSWORD = 'Password is not set',
-    INSTANCE = 'Instance is not set',
+    USERNAME = 'snowUsername is not set',
+    PASSWORD = 'snowPassword is not set',
+    INSTANCE = 'snowSourceInstance is not set',
     SYSID_OR_SCOPE = 'Please specify scope or sys_id',
+    INCORRECT_CONFIG = 'Configuration is incorrect',
 }
 
 export interface ApplyResponse {
@@ -41,6 +49,14 @@ export interface ApplyResult {
     percent_complete: number;
 }
 
+export interface ErrorResult {
+    status: string;
+    status_label: string;
+    status_message: string;
+    status_detail: string;
+    error: string;
+}
+
 export enum ResponseStatus {
     Pending = 0,
     Running = 1,
@@ -51,6 +67,7 @@ export enum ResponseStatus {
 
 export interface axiosConfig {
     headers: {
+        'User-Agent': string,
         Accept: string,
     };
     auth: User;

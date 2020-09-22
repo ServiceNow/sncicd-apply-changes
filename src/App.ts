@@ -1,3 +1,4 @@
+import * as core from '@actions/core'
 import {
     ApplyResponse,
     ApplyResult,
@@ -7,12 +8,16 @@ import {
     ResponseStatus,
     User,
     axiosConfig,
+    Errors,
+    Params,
+    ErrorResult,
 } from './types/app.types'
 import axios from 'axios'
 
 export default class App {
     sleepTime = 3000
 
+    props: AppProps
     user: User
     snowSourceInstance: string
     config: axiosConfig
@@ -30,27 +35,50 @@ export default class App {
     }
 
     constructor(props: AppProps) {
+        this.props = props
         this.snowSourceInstance = props.snowSourceInstance
         this.user = {
             username: props.username,
             password: props.password,
         }
         this.config = {
-            headers: { Accept: 'application/json' },
+            headers: {
+                'User-Agent': 'sncicd_extint_github',
+                Accept: 'application/json',
+            },
             auth: this.user,
         }
     }
 
-    buildRequestUrl(instance: string, appSysId: string, scope: string): string {
-        if (!instance || (!appSysId && !scope)) throw new Error(this.messages.incorrectConfig)
-        let param = ''
-        if (appSysId && !scope) {
-            param = `app_sys_id=${appSysId}`
-        }
-        if (scope && !appSysId) {
-            param = `app_scope=${scope}`
-        }
-        return `https://${instance}.service-now.com/api/sn_cicd/sc/apply_changes?${param}`
+    buildParams(options: Params): string {
+        return (
+            Object.keys(options)
+
+                // eslint-disable-next-line no-prototype-builtins,@typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                // eslint-disable-next-line no-prototype-builtins
+                .filter(key => options.hasOwnProperty(key) && options[key])
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                .map(key => `${key}=${encodeURIComponent(options[key])}`)
+                .join('&')
+        )
+    }
+
+    /**
+     * Takes options object, convert it to encoded URI string
+     * and append to the request url
+     *
+     * @param options   Set of options to be appended as params
+     *
+     * @returns string  Url to API
+     */
+    buildRequestUrl(options: Params): string {
+        if (!this.props.snowSourceInstance || (!options.app_sys_id && !options.app_scope))
+            throw new Error(Errors.INCORRECT_CONFIG)
+
+        const params: string = this.buildParams(options)
+        return `https://${this.props.snowSourceInstance}.service-now.com/api/sn_cicd/sc/apply_changes?${params}`
     }
 
     /**
@@ -58,14 +86,19 @@ export default class App {
      *
      * @param branch    The name of the branch to be applied
      *                  on the SNow side
-     * @param appSysId  sys_id of the servicenow app
      *
-     * @param scope
      * @returns         Promise void
      */
-    async applyChanges(branch: branch_name, appSysId: string, scope: string): Promise<void> {
+    async applyChanges(branch: branch_name): Promise<void> {
         // build the request api url
-        const url: string = this.buildRequestUrl(this.snowSourceInstance, appSysId, scope)
+        const options: Params = {}
+        if (!this.props.appSysID) {
+            options.app_scope = this.props.scope
+        } else {
+            options.app_sys_id = this.props.appSysID
+        }
+
+        const url: string = this.buildRequestUrl(options)
         // set the branch to update on SNow side
         const body: RequestBody = {
             branch_name: branch,
@@ -75,8 +108,13 @@ export default class App {
             await this.printStatus(response.data.result)
         } catch (error) {
             let message: string
-            if (error.code) {
-                message = this.errCodeMessages[error.code || error.response.status]
+            if (error.response && error.response.status) {
+                if (this.errCodeMessages[error.response.status]) {
+                    message = this.errCodeMessages[error.response.status]
+                } else {
+                    const result: ErrorResult = error.response.data.result
+                    message = result.error || result.status_message
+                }
             } else {
                 message = error.message
             }
@@ -108,10 +146,9 @@ export default class App {
      * @returns         void
      */
     async printStatus(result: ApplyResult): Promise<void> {
-        if (+result.status === ResponseStatus.Pending) console.log(result.status_label)
+        if (+result.status === ResponseStatus.Pending) core.info(result.status_label)
 
-        if (+result.status === ResponseStatus.Running)
-            console.log(`${result.status_label}: ${result.percent_complete}%`)
+        if (+result.status === ResponseStatus.Running) core.info(`${result.status_label}: ${result.percent_complete}%`)
 
         // Recursion to check the status of the request
         if (+result.status < ResponseStatus.Successful) {
@@ -121,12 +158,12 @@ export default class App {
             // Call itself if the request in the running or pending state
             await this.printStatus(response.data.result)
         } else {
-            console.log(result.status_message)
-            console.log(result.status_detail)
+            core.info(result.status_message)
+            core.info(result.status_detail)
 
             // Log the success result, the step of the pipeline is success as well
             if (+result.status === ResponseStatus.Successful) {
-                console.log(result.status_label)
+                core.info(result.status_label)
             }
 
             // Log the failed result, the step throw an error to fail the step

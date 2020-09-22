@@ -1,6 +1,6 @@
 import { configMsg, run } from '../index'
 import * as core from '@actions/core'
-import { Errors } from '../../../../types/app.types'
+import { Errors } from '../../../../src/types/app.types'
 
 describe('Apply chnages', () => {
     const OLD_ENV = process.env
@@ -10,7 +10,7 @@ describe('Apply chnages', () => {
         jest.clearAllTimers()
         process.env = { ...OLD_ENV } // make a copy
 
-        jest.spyOn(core, 'setFailed')
+        jest.spyOn(core, 'setFailed').mockImplementation(jest.fn())
     })
 
     afterAll(() => {
@@ -21,6 +21,19 @@ describe('Apply chnages', () => {
         // simulate the secrets are not set
         process.env = {}
         const errors = [Errors.USERNAME, Errors.PASSWORD, Errors.INSTANCE, Errors.SYSID_OR_SCOPE].join('. ')
+
+        run()
+
+        expect(core.setFailed).toHaveBeenCalledWith(`${errors}${configMsg}`)
+    })
+
+    it('app_sys_id and not app_scope', () => {
+        // simulate the secrets are not set
+        process.env = {
+            snowSourceInstance: 'test',
+            appSysID: '123',
+        }
+        const errors = [Errors.USERNAME, Errors.PASSWORD].join('. ')
 
         run()
 

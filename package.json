@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "tsc --noEmit && jest",
+    "test": "tsc --noEmit && jest unit --runInBand --collect-coverage",
+    "integration": "tsc --noEmit && jest integration --runInBand",
     "lint": "eslint . --ext .ts",
     "format": "prettier --config prettier.json --write ./**/*.ts"
   },

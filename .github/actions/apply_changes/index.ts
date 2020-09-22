@@ -1,7 +1,7 @@
 import * as github from '@actions/github'
 import * as core from '@actions/core'
-import App from '../../../App'
-import { AppProps, branch_name, Errors } from '../../../types/app.types'
+import App from '../../../src/App'
+import { AppProps, branch_name, Errors } from '../../../src/types/app.types'
 
 export const configMsg = '. Configure Github secrets please'
 
@@ -38,13 +38,15 @@ export const run = (): void => {
                 branch = splitted[splitted.length - 1]
             }
             const props: AppProps = {
+                appSysID,
+                scope: appScope,
                 username: snowUsername,
                 password: snowPassword,
                 snowSourceInstance: snowSourceInstance,
             }
             const app = new App(props)
 
-            app.applyChanges(branch, appSysID, appScope).catch(error => {
+            app.applyChanges(branch).catch(error => {
                 core.setFailed(error.message)
             })
         }
