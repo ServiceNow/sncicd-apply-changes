@@ -1,6 +1,6 @@
 {
   "name": "cicd_apply_changes",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vvoloshchuk/apply_changes.git"
+    "url": "git+https://github.com/ServiceNow/sncicd_apply_changes.git"
   },
   "author": "SoftServe inc.",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vvoloshchuk/apply_changes/issues"
+    "url": "https://github.com/ServiceNow/sncicd_apply_changes/issues"
   },
-  "homepage": "https://github.com/vvoloshchuk/apply_changes#readme",
+  "homepage": "https://github.com/ServiceNow/sncicd_apply_changes#readme",
   "devDependencies": {
     "@types/jest": "^26.0.12",
     "@types/node": "^14.6.2",
