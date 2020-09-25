@@ -22,10 +22,6 @@ This action applies changes from a remote source control to a specified local ap
 - [@actions/core](https://github.com/actions/toolkit/tree/master/packages/core)
 - [@actions/github](https://github.com/actions/toolkit/tree/master/packages/github)
 - [axios](https://github.com/axios/axios)
-- [archiver](https://github.com/archiverjs/node-archiver)
-- [fs-extra](https://github.com/jprichardson/node-fs-extra)
-
-
 
 # Usage
 ## Step 1: Collect the data from ServiceNow
