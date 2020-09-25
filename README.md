@@ -38,7 +38,7 @@ Create secrets called
 ## Step 3: Configure the GitHub action
 ```yaml
 - name: Apply Changes
-  uses: <url to the repository with action> # like username/repo-name
+  uses: ServiceNow/sncicd_apply_changes@1.0 # like username/repo-name
   env:
     snowUsername: ${{ secrets.SNOW_USERNAME }}
     snowPassword: ${{ secrets.SNOW_PASSWORD }}
