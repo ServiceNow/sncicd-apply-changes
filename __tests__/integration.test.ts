@@ -1,6 +1,6 @@
 import { configMsg, run } from '../index'
 import * as core from '@actions/core'
-import { Errors } from '../../../../src/types/app.types'
+import { Errors } from '../src/types/app.types'
 
 describe('Apply chnages', () => {
     const OLD_ENV = process.env

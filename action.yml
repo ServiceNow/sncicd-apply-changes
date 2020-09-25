@@ -3,4 +3,4 @@ description: 'Starts applying changes from a remote source control to a specifie
 
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: './lib/index.js'
