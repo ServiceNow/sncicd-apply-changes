@@ -1,4 +1,4 @@
-# ServiceNow Apply Changes
+# ServiceNow CI/CD GitHub Action for Apply Changes
 
 This action applies changes from a remote source control to a specified local application
 
