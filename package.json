@@ -1,5 +1,5 @@
 {
-  "name": "cicd_apply_changes",
+  "name": "sncicd-apply-changes",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ServiceNow/sncicd_apply_changes.git"
+    "url": "git+https://github.com/ServiceNow/sncicd-apply-changes.git"
   },
   "author": "SoftServe inc.",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ServiceNow/sncicd_apply_changes/issues"
+    "url": "https://github.com/ServiceNow/sncicd-apply-changes/issues"
   },
-  "homepage": "https://github.com/ServiceNow/sncicd_apply_changes#readme",
+  "homepage": "https://github.com/ServiceNow/sncicd-apply-changes#readme",
   "devDependencies": {
     "@types/jest": "^26.0.12",
     "@types/node": "^14.6.2",
