@@ -2,27 +2,6 @@
 
 This action applies changes from a remote source control to a specified local application
 
-
-### Requirements
-- nodejs version >= 12
-### DevDependecies
-- [jest](https://github.com/facebook/jest)
-- [prettier](https://github.com/prettier/prettier)
-- [eslint](https://github.com/eslint/eslint)
-- [ts-jest](https://github.com/kulshekhar/ts-jest)
-- [typescript](https://github.com/microsoft/TypeScript)
-- [@types/jest](https://www.npmjs.com/package/@types/jest)
-- [@types/node](https://www.npmjs.com/package/@types/node)
-- [@typescript-eslint/eslint-plugin](https://www.npmjs.com/package/@typescript-eslint/eslint-plugin)
-- [@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser)
-- [eslint-config-prettier](npmjs.com/package/eslint-config-prettier)
-- [eslint-plugin-prettier](https://www.npmjs.com/package/eslint-plugin-prettier)
-
-### Dependencies
-- [@actions/core](https://github.com/actions/toolkit/tree/master/packages/core)
-- [@actions/github](https://github.com/actions/toolkit/tree/master/packages/github)
-- [axios](https://github.com/axios/axios)
-
 # Usage
 ## Step 1: Collect the data from ServiceNow
 Collect all required data from the ServiceNow - username, password, instance, application sys_id or scope
