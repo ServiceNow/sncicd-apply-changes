@@ -1,4 +1,4 @@
-name: 'Apply changes'
+name: ServiceNow CI/CD Apply Changes
 description: 'Starts applying changes from a remote source control to a specified local application.'
 
 runs:
