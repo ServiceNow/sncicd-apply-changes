@@ -39,6 +39,8 @@ Environment variable should be set up in the Step 1
 - appSysID - Required if app_scope is not specified. The sys_id of the application for which to apply the changes
 - appScope - Required if app_sys_id is not specified. The scope name of the application for which to apply the changes, such as x_aah_custom_app
 
+# Contributing
+
 ## Tests
 
 Tests should be ran via npm commands:
@@ -64,6 +66,8 @@ npm run buid
 npm run format
 npm run lint
 ```
+
+# Notices
 
 ## Support Model
 
