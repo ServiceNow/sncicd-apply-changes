@@ -1,5 +1,5 @@
 name: ServiceNow CI/CD Apply Changes
-description: 'Starts applying changes from a remote source control to a specified local application.'
+description: 'Apply Remote Changes from a remote Git repo for an application linked to Source Control on an instance.'
 author: "ServiceNow"
 runs:
   using: 'node12'
