@@ -1,6 +1,9 @@
 name: ServiceNow CI/CD Apply Changes
 description: 'Starts applying changes from a remote source control to a specified local application.'
-
+author: "ServiceNow"
 runs:
   using: 'node12'
   main: './lib/index.js'
+branding:
+  icon: 'refresh-ccw'
+  color: 'green'
