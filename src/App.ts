@@ -99,6 +99,8 @@ export default class App {
         }
 
         // set the branch to update on SNow side
+        core.info("Branch is set to " + branch)
+
         if (!branch) {
             options.branch_name = branch
         }
