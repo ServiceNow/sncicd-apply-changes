@@ -1,7 +1,6 @@
-import * as github from '@actions/github'
 import * as core from '@actions/core'
 import App from './src/App'
-import { AppProps, branch_name, Errors } from './src/types/app.types'
+import { AppProps, Errors } from './src/types/app.types'
 
 export const configMsg = '. Configure Github secrets please'
 
@@ -14,6 +13,7 @@ export const run = (): void => {
             snowSourceInstance = '',
             appSysID = '',
             appScope = '',
+            branch = '',
         } = process.env
 
         if (!snowUsername) {
@@ -32,21 +32,17 @@ export const run = (): void => {
         if (errors.length) {
             core.setFailed(`${errors.join('. ')}${configMsg}`)
         } else {
-            let branch: branch_name = github.context.ref
-            if (branch) {
-                const splitted: string[] = branch.split('/')
-                branch = splitted[splitted.length - 1]
-            }
             const props: AppProps = {
                 appSysID,
                 scope: appScope,
                 username: snowUsername,
                 password: snowPassword,
                 snowSourceInstance: snowSourceInstance,
+                branch: branch,
             }
             const app = new App(props)
 
-            app.applyChanges(branch).catch(error => {
+            app.applyChanges().catch(error => {
                 core.setFailed(error.message)
             })
         }

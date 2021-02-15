@@ -6,6 +6,7 @@ export interface User {
 export interface AppProps extends User {
     snowSourceInstance: string;
     appSysID?: string;
+    branch?: string;
     scope?: string;
 }
 
