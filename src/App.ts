@@ -101,7 +101,7 @@ export default class App {
         if (!branch) {
             options.branch_name = branch
         }
-        const body = "";
+        const body: string = "";
         const url: string = this.buildRequestUrl(options)
         try {
             const response: ApplyResponse = await axios.post(url, body, this.config)
