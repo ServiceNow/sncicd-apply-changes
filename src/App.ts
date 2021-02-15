@@ -107,7 +107,7 @@ export default class App {
         try {
             const response: ApplyResponse = await axios.post(url, body, this.config)
             await this.printStatus(response.data.result)
-            core.info(response.data.result)
+            core.info(response.data.result + "") 
         } catch (error) {
             let message: string
             if (error.response && error.response.status) {
@@ -115,7 +115,8 @@ export default class App {
                     message = this.errCodeMessages[error.response.status]
                 } else {
                     const result: ErrorResult = error.response.data.result
-                    message = result.error || result.status_message
+                    //message = result.error || result.status_message
+                    message = "Something faieled"
                 }
             } else {
                 message = error.message
@@ -170,7 +171,8 @@ export default class App {
 
             // Log the failed result, the step throw an error to fail the step
             if (+result.status === ResponseStatus.Failed) {
-                throw new Error(result.error)
+                throw new Error("Something failed 2")
+//                throw new Error(result.error)
             }
 
             // Log the canceled result, the step throw an error to fail the step
