@@ -9,7 +9,7 @@ import {
     axiosConfig,
     Errors,
     Params,
-    ErrorResult,
+ //   ErrorResult,
 } from './types/app.types'
 import axios from 'axios'
 
@@ -114,7 +114,7 @@ export default class App {
                 if (this.errCodeMessages[error.response.status]) {
                     message = this.errCodeMessages[error.response.status]
                 } else {
-                    const result: ErrorResult = error.response.data.result
+                    //const result: ErrorResult = error.response.data.result
                     //message = result.error || result.status_message
                     message = "Something faieled"
                 }
