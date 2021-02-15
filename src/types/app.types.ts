@@ -15,6 +15,7 @@ export interface RequestBody {
 export interface Params {
     app_scope?: string;
     app_sys_id?: string;
+    branch_name?: string;
 }
 
 export type branch_name = string | undefined
