@@ -116,7 +116,7 @@ export default class App {
                 } else {
                     //const result: ErrorResult = error.response.data.result
                     //message = result.error || result.status_message
-                    message = "Something faieled"
+                    message = "Something failed: " + JSON.stringify(error);
                 }
             } else {
                 message = error.message
