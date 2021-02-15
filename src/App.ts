@@ -48,6 +48,7 @@ export default class App {
             },
             auth: this.user,
         }
+        core.info('App constructor branch: ' + this.props.branch);
     }
 
     buildParams(options: Params): string {

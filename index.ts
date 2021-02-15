@@ -16,8 +16,6 @@ export const run = (): void => {
             branch = '',
         } = process.env
 
-        core.info('index has branch set to: ' + branch)
-        core.info('env branch: ' + process.env.branch)
         if (!snowUsername) {
             errors.push(Errors.USERNAME)
         }
