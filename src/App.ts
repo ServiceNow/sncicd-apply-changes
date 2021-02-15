@@ -103,9 +103,11 @@ export default class App {
         }
         const body: string = "";
         const url: string = this.buildRequestUrl(options)
+        core.info("Ready to call URL " + url)
         try {
             const response: ApplyResponse = await axios.post(url, body, this.config)
             await this.printStatus(response.data.result)
+            core.info(response.data.result)
         } catch (error) {
             let message: string
             if (error.response && error.response.status) {
