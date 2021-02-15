@@ -9,7 +9,7 @@ import {
     axiosConfig,
     Errors,
     Params,
- //   ErrorResult,
+    ErrorResult,
 } from './types/app.types'
 import axios from 'axios'
 
@@ -116,9 +116,8 @@ export default class App {
                 if (this.errCodeMessages[error.response.status]) {
                     message = this.errCodeMessages[error.response.status]
                 } else {
-                    //const result: ErrorResult = error.response.data.result
-                    //message = result.error || result.status_message
-                    message = "Something failed: " + JSON.stringify(error);
+                    const result: ErrorResult = error.response.data.result
+                    message = result.error || result.status_message
                 }
             } else {
                 message = error.message
@@ -173,8 +172,7 @@ export default class App {
 
             // Log the failed result, the step throw an error to fail the step
             if (+result.status === ResponseStatus.Failed) {
-                throw new Error("Something failed 2")
-//                throw new Error(result.error)
+                throw new Error(result.error)
             }
 
             // Log the canceled result, the step throw an error to fail the step
