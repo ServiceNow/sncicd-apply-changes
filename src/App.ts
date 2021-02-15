@@ -98,11 +98,12 @@ export default class App {
             options.app_sys_id = this.props.appSysID
         }
 
-        const url: string = this.buildRequestUrl(options)
         // set the branch to update on SNow side
-        const body: RequestBody = {
-            branch_name: branch,
+        if (!branch) {
+            options.branch_name = branch
         }
+
+        const url: string = this.buildRequestUrl(options)
         try {
             const response: ApplyResponse = await axios.post(url, body, this.config)
             await this.printStatus(response.data.result)

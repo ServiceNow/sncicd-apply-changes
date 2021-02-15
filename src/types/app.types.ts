@@ -10,7 +10,6 @@ export interface AppProps extends User {
 }
 
 export interface RequestBody {
-    branch_name: branch_name;
 }
 
 export interface Params {
