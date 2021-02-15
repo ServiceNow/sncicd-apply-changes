@@ -4,6 +4,7 @@ import {
     ApplyResult,
     AppProps,
     branch_name,
+    RequestBody,
     ResponseStatus,
     User,
     axiosConfig,
@@ -101,8 +102,9 @@ export default class App {
         if (!branch) {
             options.branch_name = branch
         }
-        const body: string = "";
         const url: string = this.buildRequestUrl(options)
+        const body: RequestBody = {
+        }
         core.info("Ready to call URL " + url)
         try {
             const response: ApplyResponse = await axios.post(url, body, this.config)
