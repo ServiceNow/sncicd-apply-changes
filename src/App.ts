@@ -98,7 +98,7 @@ export default class App {
             options.app_sys_id = this.props.appSysID
         }
 
-        if (!this.props.branch) {
+        if (this.props.branch) {
             options.branch_name = this.props.branch
         } 
 
