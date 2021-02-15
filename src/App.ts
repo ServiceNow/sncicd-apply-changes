@@ -48,7 +48,6 @@ export default class App {
             },
             auth: this.user,
         }
-        core.info('App constructor branch: ' + this.props.branch);
     }
 
     buildParams(options: Params): string {
@@ -104,7 +103,7 @@ export default class App {
         } 
 
         // set the branch to update on SNow side
-        core.info("Branch is set to " + options.branch_name )
+        core.info("Branch is set to " + options.branch_name + " | " +this.props.branch)
 
         const url: string = this.buildRequestUrl(options)
         const body: RequestBody = {
