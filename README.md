@@ -31,6 +31,7 @@ https://github.com/ServiceNow/sncicd_githubworkflow
     snowSourceInstance: ${{ secrets.SNOW_SOURCE_INSTANCE }}
     appSysID: ${{ secrets.APP_SYS_ID }}
     appScope: ${{ secrets.APP_SCOPE }}
+    branch: 'instances/dev'
 ```
 Environment variable should be set up in the Step 1
 - snowUsername - Username to ServiceNow instance
@@ -47,6 +48,7 @@ Tests should be ran via npm commands:
 
 #### Unit tests
 ```shell script
+npm install
 npm run test
 ```   
 
@@ -58,7 +60,7 @@ npm run integration
 ## Build
 
 ```shell script
-npm run buid
+npm run build
 ```
 
 ## Formatting and Linting
