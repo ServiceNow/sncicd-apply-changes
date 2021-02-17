@@ -79,7 +79,7 @@ describe(`App lib`, () => {
         post.mockResolvedValue(response)
         props.appSysID = '123'
         const app = new App(props)
-        app.applyChanges('master')
+        app.applyChanges('')
         expect(post).toHaveBeenCalled()
     })
 
