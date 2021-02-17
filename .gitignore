@@ -17,3 +17,6 @@ typings/
 
 # Optional eslint cache
 .eslintcache
+
+# node_modules
+node_modules
