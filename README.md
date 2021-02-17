@@ -48,7 +48,6 @@ Tests should be ran via npm commands:
 
 #### Unit tests
 ```shell script
-npm install
 npm run test
 ```   
 
