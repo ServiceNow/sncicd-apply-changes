@@ -3,7 +3,6 @@ import {
     ApplyResponse,
     ApplyResult,
     AppProps,
-    branch_name,
     RequestBody,
     ResponseStatus,
     User,
@@ -31,6 +30,7 @@ export default class App {
         404: 'Not found. The requested item was not found.',
         405: 'Invalid method. The functionality is disabled.',
         409: 'Conflict. The requested item is not unique.',
+        415: 'App is not yet installed in target instance',
         500: 'Internal server error. An unexpected error occurred while processing the request.',
     }
 
@@ -89,7 +89,7 @@ export default class App {
      *
      * @returns         Promise void
      */
-    async applyChanges(branch: branch_name): Promise<void> {
+    async applyChanges(): Promise<void> {
         // build the request api url
         const options: Params = {}
         if (!this.props.appSysID) {
@@ -98,14 +98,18 @@ export default class App {
             options.app_sys_id = this.props.appSysID
         }
 
-        const url: string = this.buildRequestUrl(options)
         // set the branch to update on SNow side
+        if (this.props.branch) {
+            options.branch_name = this.props.branch
+        } 
+
+        const url: string = this.buildRequestUrl(options)
         const body: RequestBody = {
-            branch_name: branch,
         }
         try {
             const response: ApplyResponse = await axios.post(url, body, this.config)
             await this.printStatus(response.data.result)
+            core.info(response.data.result + "") 
         } catch (error) {
             let message: string
             if (error.response && error.response.status) {

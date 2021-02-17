@@ -6,16 +6,17 @@ export interface User {
 export interface AppProps extends User {
     snowSourceInstance: string;
     appSysID?: string;
+    branch?: string;
     scope?: string;
 }
 
 export interface RequestBody {
-    branch_name: branch_name;
 }
 
 export interface Params {
     app_scope?: string;
     app_sys_id?: string;
+    branch_name?: string;
 }
 
 export type branch_name = string | undefined
