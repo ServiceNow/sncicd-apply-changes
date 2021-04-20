@@ -30,7 +30,7 @@ describe('Apply chnages', () => {
     it('app_sys_id and not app_scope', () => {
         // simulate the secrets are not set
         process.env = {
-            snowSourceInstance: 'test',
+            nowSourceInstance: 'test',
             appSysID: '123',
         }
         const errors = [Errors.USERNAME, Errors.PASSWORD].join('. ')
@@ -41,9 +41,12 @@ describe('Apply chnages', () => {
     })
 
     it('success with creds', () => {
-        // do not set process env
-        // workflow run the tests
-        // it will take envs from the workflow
+        process.env = {
+            nowUsername: 'test',
+            nowPassword: 'test',
+            nowSourceInstance: 'test',
+            appSysID: '123',
+        }
         run()
         expect(core.setFailed).not.toHaveBeenCalled()
     })

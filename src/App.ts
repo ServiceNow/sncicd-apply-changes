@@ -18,7 +18,7 @@ export default class App {
 
     props: AppProps
     user: User
-    snowSourceInstance: string
+    nowSourceInstance: string
     config: axiosConfig
     messages = {
         incorrectConfig: 'Configuration is incorrect',
@@ -36,7 +36,7 @@ export default class App {
 
     constructor(props: AppProps) {
         this.props = props
-        this.snowSourceInstance = props.snowSourceInstance
+        this.nowSourceInstance = props.nowSourceInstance
         this.user = {
             username: props.username,
             password: props.password,
@@ -74,18 +74,18 @@ export default class App {
      * @returns string  Url to API
      */
     buildRequestUrl(options: Params): string {
-        if (!this.props.snowSourceInstance || (!options.app_sys_id && !options.app_scope))
+        if (!this.props.nowSourceInstance || (!options.app_sys_id && !options.app_scope))
             throw new Error(Errors.INCORRECT_CONFIG)
 
         const params: string = this.buildParams(options)
-        return `https://${this.props.snowSourceInstance}.service-now.com/api/sn_cicd/sc/apply_changes?${params}`
+        return `https://${this.props.nowSourceInstance}.service-now.com/api/sn_cicd/sc/apply_changes?${params}`
     }
 
     /**
-     * Makes the request to SNow api apply_changes
+     * Makes the request to ServiceNow api apply_changes
      *
      * @param branch    The name of the branch to be applied
-     *                  on the SNow side
+     *                  on the ServiceNow side
      *
      * @returns         Promise void
      */
@@ -98,18 +98,17 @@ export default class App {
             options.app_sys_id = this.props.appSysID
         }
 
-        // set the branch to update on SNow side
+        // set the branch to update on ServiceNow side
         if (this.props.branch) {
             options.branch_name = this.props.branch
-        } 
+        }
 
         const url: string = this.buildRequestUrl(options)
-        const body: RequestBody = {
-        }
+        const body: RequestBody = {}
         try {
             const response: ApplyResponse = await axios.post(url, body, this.config)
             await this.printStatus(response.data.result)
-            core.info(response.data.result + "") 
+            core.info(response.data.result + '')
         } catch (error) {
             let message: string
             if (error.response && error.response.status) {

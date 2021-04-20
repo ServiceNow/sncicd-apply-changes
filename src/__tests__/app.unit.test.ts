@@ -15,7 +15,7 @@ describe(`App lib`, () => {
     })
 
     beforeEach(() => {
-        props = { appSysID: '', password: '', scope: '', snowSourceInstance: 'test', username: '' }
+        props = { appSysID: '', password: '', scope: '', nowSourceInstance: 'test', username: '' }
     })
     describe(`builds request url`, () => {
         it(`with correct params`, () => {
@@ -25,11 +25,11 @@ describe(`App lib`, () => {
             const app = new App(props)
 
             expect(app.buildRequestUrl(options)).toEqual(
-                `https://${props.snowSourceInstance}.service-now.com/api/sn_cicd/sc/apply_changes?app_sys_id=${options.app_sys_id}`,
+                `https://${props.nowSourceInstance}.service-now.com/api/sn_cicd/sc/apply_changes?app_sys_id=${options.app_sys_id}`,
             )
         })
         it(`without instance parameter`, () => {
-            props.snowSourceInstance = ''
+            props.nowSourceInstance = ''
             props.appSysID = '123'
             const options: Params = { app_scope: props.scope, app_sys_id: props.appSysID }
             const app = new App(props)
@@ -42,7 +42,7 @@ describe(`App lib`, () => {
             const app = new App(props)
 
             expect(app.buildRequestUrl(options)).toEqual(
-                `https://${props.snowSourceInstance}.service-now.com/api/sn_cicd/sc/apply_changes?app_sys_id=${options.app_sys_id}`,
+                `https://${props.nowSourceInstance}.service-now.com/api/sn_cicd/sc/apply_changes?app_sys_id=${options.app_sys_id}`,
             )
         })
         it(`with just scope parameter`, () => {
@@ -51,7 +51,7 @@ describe(`App lib`, () => {
             const app = new App(props)
 
             expect(app.buildRequestUrl(options)).toEqual(
-                `https://${props.snowSourceInstance}.service-now.com/api/sn_cicd/sc/apply_changes?app_scope=${options.app_scope}`,
+                `https://${props.nowSourceInstance}.service-now.com/api/sn_cicd/sc/apply_changes?app_scope=${options.app_scope}`,
             )
         })
     })
@@ -81,14 +81,5 @@ describe(`App lib`, () => {
         const app = new App(props)
         app.applyChanges()
         expect(post).toHaveBeenCalled()
-    })
-
-    it(`sleep throttling`, async done => {
-        props.appSysID = '123'
-        const app = new App(props)
-        const time = 2500
-        setTimeout(() => done(new Error("it didn't resolve or took longer than expected")), time)
-        await app.sleep(time - 500)
-        done()
     })
 })

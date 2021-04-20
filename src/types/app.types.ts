@@ -4,7 +4,7 @@ export interface User {
 }
 
 export interface AppProps extends User {
-    snowSourceInstance: string;
+    nowSourceInstance: string;
     appSysID?: string;
     branch?: string;
     scope?: string;
@@ -22,9 +22,9 @@ export interface Params {
 export type branch_name = string | undefined
 
 export enum Errors {
-    USERNAME = 'snowUsername is not set',
-    PASSWORD = 'snowPassword is not set',
-    INSTANCE = 'snowSourceInstance is not set',
+    USERNAME = 'nowUsername is not set',
+    PASSWORD = 'nowPassword is not set',
+    INSTANCE = 'nowSourceInstance is not set',
     SYSID_OR_SCOPE = 'Please specify scope or sys_id',
     INCORRECT_CONFIG = 'Configuration is incorrect',
 }
